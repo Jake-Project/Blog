@@ -18,6 +18,16 @@
             {{#link-to 'category2' tagName="li"}}<a href="">Random</a>{{/link-to}}
             {{#link-to 'contact' tagName="li"}}<a href="">Contact</a>{{/link-to}}
       </ul>
+
+      {{!Puts the login path to the right of the navbar}}
+      <ul class="nav navbar-nav navbar-right">
+            {{#if session.isAuthenticated}}
+              <a {{action 'invalidateSession' tagName="li"}}>Logout</a>
+            {{else}}
+              {{#link-to 'login' tagName="li"}}<a href="">Login</a>{{/link-to}}
+            {{/if}}
+
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
