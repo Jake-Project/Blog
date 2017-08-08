@@ -1,9 +1,8 @@
 {{!Creates a form for input which sets an action}}
 <div class="jumbotron text-center">
 
-  <h1>Login or Sign-up</h1>
+  <h1>Login</h1>
   <p><br>Please Enter your username and password into the boxes below</p>
-  <p>If you do not have an account please create a new one! (Not setup Yet)<br><br></p>
   <form {{action 'authenticate' on='submit'}}>
     {{!Sets the label for the form}}
     <label for="identification">Login</label>
@@ -15,4 +14,5 @@
       <p>{{errorMessage}}</p>
     {{/if}}
   </form>
+  <p><br><br><br>If you do not have an account please create a new one! <br> {{#link-to 'register'}}<a href="">Register</a>{{/link-to}}<br><br></p>
 </div>
