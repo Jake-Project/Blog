@@ -17,6 +17,20 @@ module.exports = function(environment) {
       messagingSenderId: "668950111253"
     },
 
+    firebase: 'https://your-firebase-app.firebaseio.com/',
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'firebase-simple-auth': {
+        }
+      }
+    },
+
+    'ember-simple-auth': {
+      authenticationRoute: 'sessions',
+      routeAfterAuthentication: 'posts'
+    },
+
 
     // if using ember-cli-content-security-policy
     contentSecurityPolicy: {
