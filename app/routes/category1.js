@@ -2,8 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   //Takes a model with parameters
-  model(params) {
+  model() {
     //returns a record from the store for category1 which is the blog name
-    return this.store.findRecord('blog_name');
+    var check = this.store.findAll('registration');
+//    debugger;
+    return check;
   }
 });

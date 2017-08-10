@@ -1,13 +1,20 @@
-<div class="jumbotron text-center">
-  <h1>Web Design Posts</h1>
-
-  <br/><br/>
-
-  <p>This Category is dedicated to making this very website using ember</p>
-
-  {{#each model as |blog_name|}}
-    <p>
-      {{blog_name.name}}
-    </p>
-  {{/each}}
+<div class="imageoverlay">
+  <img src="assets/images/banner.jpg" class="img-rounded" alt="Cinque Terre" width="1140" height="100">
 </div>
+
+{{!<div class="imagetext">
+  <h1>Web Design Posts</h1>
+</div>
+
+<br/><br/>
+<p>This Category is dedicated to making this very website using ember</p>
+<br><br><br>
+
+}}
+  {{#each model as |registration|}}
+    <div class="jumbotron text-center">
+      <h1>{{registration.username}}</h1>
+      <hr class="my-4">
+      <p>{{registration.password}}</p>
+      </div>
+  {{/each}}

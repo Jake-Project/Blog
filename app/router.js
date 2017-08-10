@@ -9,7 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('ember');
   //Creates a path for category 1 that links to the blog
-  this.route('category1', {path: '/category1/:blog_name'});
+  this.route('category1');
   this.route('category2');
   this.route('contact');
   this.route('about');

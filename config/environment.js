@@ -14,12 +14,9 @@ module.exports = function(environment) {
       databaseURL: "https://blogproject-a80d2.firebaseio.com",
       projectId: "blogproject-a80d2",
       storageBucket: "",
-      messagingSenderId: "668950111253"
+      messagingSenderId: "668950111253",
     },
 
-    //THIS CAUSES REGISTRATION TO BREAK?
-/*
-    firebase: 'https://your-firebase-app.firebaseio.com/',
     torii: {
       sessionServiceName: 'session',
       providers: {
@@ -32,7 +29,7 @@ module.exports = function(environment) {
       authenticationRoute: 'sessions',
       routeAfterAuthentication: 'posts'
     },
-*/
+
 
     // if using ember-cli-content-security-policy
     contentSecurityPolicy: {
