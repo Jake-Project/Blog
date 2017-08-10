@@ -4,4 +4,10 @@
   <br/><br/>
 
   <p>This Category is dedicated to making this very website using ember</p>
+
+  {{#each model as |blog_name|}}
+    <p>
+      {{blog_name.name}}
+    </p>
+  {{/each}}
 </div>

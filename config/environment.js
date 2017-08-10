@@ -17,6 +17,8 @@ module.exports = function(environment) {
       messagingSenderId: "668950111253"
     },
 
+    //THIS CAUSES REGISTRATION TO BREAK?
+/*
     firebase: 'https://your-firebase-app.firebaseio.com/',
     torii: {
       sessionServiceName: 'session',
@@ -30,7 +32,7 @@ module.exports = function(environment) {
       authenticationRoute: 'sessions',
       routeAfterAuthentication: 'posts'
     },
-
+*/
 
     // if using ember-cli-content-security-policy
     contentSecurityPolicy: {
