@@ -11,10 +11,10 @@
 <br><br><br>
 
 }}
-  {{#each model as |registration|}}
+  {{#each model as |morty|}}
     <div class="jumbotron text-center">
-      <h1>{{registration.username}}</h1>
+      <h1>{{morty.title}}</h1>
       <hr class="my-4">
-      <p>{{registration.password}}</p>
+      <p>{{morty.content}}</p>
       </div>
   {{/each}}
