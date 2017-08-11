@@ -1,0 +1,14 @@
+{{!Creates a form for input which sets an action}}
+<div class="jumbotron">
+
+  <h1>Create A New Blogpost</h1>
+  <form {{action 'authenticate' on='submit'}}>
+    {{input type='title' id='title' value=title placeholder='Title'}}
+    {{input type='content' id='content' value=content placeholder='Content'}}
+    <br><br>
+    <button class="btn-primary btn-lg" type="submit"{{action 'saveRegistration'}}>Submit Post</button>
+    {{#if errorMessage}}
+      <p>{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

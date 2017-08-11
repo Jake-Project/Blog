@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('about');
   this.route('login');
   this.route('register');
+  this.route('newblog');
 });
 
 export default Router;
