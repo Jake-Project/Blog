@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
       const title = this.get('title');
       const content = this.get('content');
 
-      const newPost = this.store.createRecord('blogPost', {title: title, content: content});
+      const newPost = this.store.createRecord('blogpost', {title: title, content: content});
       newPost.save();
     }
   }
