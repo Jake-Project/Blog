@@ -14,9 +14,27 @@
       <ul class="nav navbar-nav">
             {{#link-to 'index' tagName="li"}}<a href="">Home</a>{{/link-to}}
             {{#link-to 'about' tagName="li"}}<a href="">About</a>{{/link-to}}
-            {{#link-to 'category1' tagName="li"}}<a href="">Web-Design</a>{{/link-to}}
-            {{#link-to 'category2' tagName="li"}}<a href="">Random</a>{{/link-to}}
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Blogs<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                {{#link-to 'category1' tagName="li"}}<a href="">Web-Design</a>{{/link-to}}
+                {{#link-to 'category2' tagName="li"}}<a href="">Random</a>{{/link-to}}
+                {{#link-to 'newblog' tagName="li"}}<a href="">Create-New</a>{{/link-to}}
+              </ul>
+            </li>
             {{#link-to 'contact' tagName="li"}}<a href="">Contact</a>{{/link-to}}
+      </ul>
+
+      {{!Puts the login path to the right of the navbar}}
+      <ul class="nav navbar-nav navbar-right">
+            {{#if session.isAuthenticated}}
+              <a {{action 'invalidateSession' tagName="li"}}>Logout</a>
+            {{else}}
+              {{#link-to 'login' tagName="li"}}<a href="">Login</a>{{/link-to}}
+            {{/if}}
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

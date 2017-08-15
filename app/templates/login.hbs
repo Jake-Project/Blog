@@ -1,0 +1,18 @@
+{{!Creates a form for input which sets an action}}
+<div class="jumbotron text-center">
+
+  <h1>Login</h1>
+  <p><br>Please Enter your username and password into the boxes below</p>
+  <form {{action 'authenticate' on='submit'}}>
+    {{!Sets the label for the form}}
+    <label for="identification">Login</label>
+    {{input id='identification' placeholder='Enter login' value=username}}
+    <label for="password">Password</label>
+    {{input id='password' placeholder='Enter Password' type='password' value=password}}
+    <button {{action 'authenticate' 'password'}}>Login</button>
+    {{#if errorMessage}}
+      <p>{{errorMessage}}</p>
+    {{/if}}
+  </form>
+  <p><br><br><br>If you do not have an account please create a new one! <br> {{#link-to 'register'}}<a href="">Register</a>{{/link-to}}<br><br></p>
+</div>

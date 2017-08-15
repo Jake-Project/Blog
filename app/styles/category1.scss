@@ -1,0 +1,19 @@
+@import "bootstrap";
+
+//creates a space from the top of the page for the navbar
+
+.imageoverlay{
+  position: relative;
+  width: 1060px;
+  padding-bottom: 20px;
+}
+.imagetext{
+   position: absolute;
+   bottom: 5%;
+  color: white;
+  font-family: Roboto;
+  font-size: 1.25em;
+  left: 0;
+  padding: 0.25em 0.75em;
+  position: absolute;
+}

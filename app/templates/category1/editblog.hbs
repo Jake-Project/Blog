@@ -1,0 +1,22 @@
+<h2>Edit Blogpost</h2>
+
+<div class="jumbotron">
+  <h2>Edit Blogpost</h2>
+  <hr class="my-4">
+  <div class="form-group">
+    {{!Label for form which is for the blog title}}
+    <label class="col-sm-2 control-label">Blog Title</label>
+      {{input type="text" value=model.title class="form-control" placeholder="The title of the blog post"}}
+  </div>
+
+  {{!Label for the form which is for the content}}
+  <div class="form-group">
+    <label class="col-sm-5 control-label">Blog Content</label>
+      {{input type="text" value=model.content class="form-control" placeholder="The content of the blog post"}}
+  </div>
+
+  {{!Action call to save the blog upon pressing a button}}
+  <div class="form-group">
+      <button type="submit" class="btn btn-default" {{action 'saveBlogPost' model}}>Save changes</button>
+  </div>
+</div>
