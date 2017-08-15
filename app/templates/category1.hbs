@@ -15,7 +15,7 @@
 
 {{outlet}}
 {{#each model as |blogpost|}}
-  <div class="jumbotron text-center">
+  <div class="jumbotron blogtron">
     {{#link-to 'category1.editblog' blogpost.id class='btn btn-success btn-xs'}}Edit{{/link-to}}
     <button class="btn btn-danger btn-xs" {{action 'deleteBlog' this.blogpost.id}}>Delete</button>
     <hr class="my-4">
