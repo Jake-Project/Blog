@@ -34,6 +34,7 @@
     "ember-data": "~2.14.3",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
+    "ember-modal-dialog": "^2.3.0",
     "ember-resolver": "^4.0.0",
     "ember-simple-auth": "^1.4.0",
     "ember-simple-auth-firebase": "0.0.3",
