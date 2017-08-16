@@ -1,16 +1,6 @@
 const express = require('express')
 const app = express()
 var cors = require('cors')
-//var cars = ["Saab", "Volvo", "BMW"];
-var blogposts = ["hey", "help", "what am i doing"];
-
-const db1 = [
-     {
-         id: '-Kr_QaTAZAWRxE9AsZ8e',
-         title: 'New title',
-         content: 'some random content'
-     }
-]
 
 const db = {
 "blogposts" : [
