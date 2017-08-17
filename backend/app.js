@@ -1,6 +1,20 @@
+//Getting express and mongoose before setting up the server with 'app ='
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 var cors = require('cors')
+
+//Creation of the registration schema. 
+//This holds details for the login for a user
+var registrationSchema = new mongoose.Schema({
+    username: 'string',
+    password: 'string',
+    email: 'string'
+});
+
+//Use the schema to define our model
+//The database will make a 'registrations' collection from this model.
+var RegistrationModel = mongoose.model('registration', registrationSchema);
 
 const db = {
 "blogposts" : [
@@ -22,16 +36,32 @@ const db = {
   ]
 }
 
+//Allow app to use CORS. Important for transferring JSON files.
 app.use(cors())
+
+//Set appropriate headers for server
+app.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested0With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+    next();
+});
+
+//Tell mongoose to connect to MongoDB instance and look for ember data.
+//If no database exists, it will create one for us.
+mongoose.connect('mongodb://localhost/emberData');
 
 app.get('/', function (req, res) {
     //res.send('Hello World!')
     res.send('hello')
 })
 
+//New lines???
+app.get('/api/', function(req,res){
+    res.send('working');
+});
+
 app.get('/blogposts', function(req, res){
     res.send(db)
 })
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+app.listen('3000');
