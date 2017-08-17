@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const app = express()
 var cors = require('cors')
 
-//Creation of the registration schema. 
+//Creation of the registration schema.
 //This holds details for the login for a user
 var registrationSchema = new mongoose.Schema({
     username: 'string',
@@ -12,9 +12,20 @@ var registrationSchema = new mongoose.Schema({
     email: 'string'
 });
 
+//Creation of the blogpost schema
+//This holds details for the blogposts
+var blogpostSchema = new mongoose.Schema({
+    title: 'string',
+    content: 'string'
+});
+
 //Use the schema to define our model
 //The database will make a 'registrations' collection from this model.
 var RegistrationModel = mongoose.model('registration', registrationSchema);
+
+//Use the schema to define our model
+//The database will make a 'blogpost' collection from this model.
+var BlogpostModel = mongoose.model('blogpost', blogpostSchema);
 
 const db = {
 "blogposts" : [
@@ -59,6 +70,33 @@ app.get('/', function (req, res) {
 //New lines???
 app.get('/api/', function(req,res){
     res.send('working');
+});
+
+//route to get all of the registrations
+app.get('/api/registrations', function(req,res){
+    RegistrationModel.find({}, function(err,docs){
+        if(err){
+            res.send({error:res});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+            res.send({registration:docs});
+        }
+    });
+});
+
+//Add some more stuff to this
+app.post('/api/blogposts', function(req,res){
+    if(err){
+        res.send({error:res});
+      }
+      else{
+    var title =req.body.title;
+    var content = req.body.content;
+    console.log("title = " + title + ", content = " + content);
+    res.end("yes");
+  }
 });
 
 app.get('/blogposts', function(req, res){
