@@ -12,5 +12,4 @@ export default Ember.Controller.extend({
       newPost.save();
     }
   }
-
 });
