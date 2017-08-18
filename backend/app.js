@@ -1,8 +1,12 @@
 //Getting express and mongoose before setting up the server with 'app ='
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 var cors = require('cors')
+
+//add promise library
+mongoose.Promise = require('bluebird');
 
 //Creation of the registration schema.
 //This holds details for the login for a user
@@ -58,6 +62,11 @@ app.use(function(req, res, next){
     next();
 });
 
+//Support parsing of application/json type post data
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({extended: true}));
+
 //Tell mongoose to connect to MongoDB instance and look for ember data.
 //If no database exists, it will create one for us.
 mongoose.connect('mongodb://localhost/emberData');
@@ -86,17 +95,37 @@ app.get('/api/registrations', function(req,res){
     });
 });
 
+//route to post registration
+app.post('/api/registrations', function(req,res){
+    var newRegistration = new RegistrationModel({username: req.body.registration.username,
+    password: req.body.registration.password, email: req.body.registration.email});
+    newRegistration.save(function (err){
+      if(err) return handleError(err);
+    });
+});
+
+//route to get all of the blogposts
+app.get('/api/blogposts', function(req,res){
+    BlogpostModel.find({}, function(err,docs){
+        if(err){
+            res.send({error:res});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+            res.send({blogpost:docs});
+        }
+    });
+});
+
+//in response send the id and update the store
+//NEED TO INSERT STUFF TO THE DATABASE
 //Add some more stuff to this
 app.post('/api/blogposts', function(req,res){
-    if(err){
-        res.send({error:res});
-      }
-      else{
-    var title =req.body.title;
-    var content = req.body.content;
-    console.log("title = " + title + ", content = " + content);
-    res.end("yes");
-  }
+    var newPost = new BlogpostModel({title: req.body.blogpost.title, content: req.body.blogpost.content});
+    newPost.save(function (err) {
+      if (err) return handleError(err);
+    });
 });
 
 app.get('/blogposts', function(req, res){
