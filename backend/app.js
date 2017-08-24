@@ -76,7 +76,6 @@ app.get('/', function (req, res) {
     res.send('hello')
 })
 
-//New lines???
 app.get('/api/', function(req,res){
     res.send('working');
 });
@@ -119,8 +118,6 @@ app.get('/api/blogposts', function(req,res){
 });
 
 //in response send the id and update the store
-//NEED TO INSERT STUFF TO THE DATABASE
-//Add some more stuff to this
 app.post('/api/blogposts', function(req,res){
     var newPost = new BlogpostModel({title: req.body.blogpost.title, content: req.body.blogpost.content});
     newPost.save(function (err) {
@@ -128,7 +125,28 @@ app.post('/api/blogposts', function(req,res){
     });
 });
 
+//route to authenticate a user
+app.post('/api/authenticate', function(req,res){
+    var authenticate = new RegistrationModel({username: req.body.username,
+    password: req.body.password, email: null});
+
+    RegistrationModel.find({username: authenticate.username, password: authenticate.password}, function(err,docs){
+        if(docs.length == 0){
+            res.send({error:"Incorrect Password Or Username"});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+
+            res.send({registration:docs});
+
+        }
+    });
+});
+
 app.get('/blogposts', function(req, res){
     res.send(db)
 })
+
+//Server starts to run
 app.listen('3000');
