@@ -1,6 +1,35 @@
+//Getting express and mongoose before setting up the server with 'app ='
 const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 var cors = require('cors')
+
+//add promise library
+mongoose.Promise = require('bluebird');
+
+//Creation of the registration schema.
+//This holds details for the login for a user
+var registrationSchema = new mongoose.Schema({
+    username: 'string',
+    password: 'string',
+    email: 'string'
+});
+
+//Creation of the blogpost schema
+//This holds details for the blogposts
+var blogpostSchema = new mongoose.Schema({
+    title: 'string',
+    content: 'string'
+});
+
+//Use the schema to define our model
+//The database will make a 'registrations' collection from this model.
+var RegistrationModel = mongoose.model('registration', registrationSchema);
+
+//Use the schema to define our model
+//The database will make a 'blogpost' collection from this model.
+var BlogpostModel = mongoose.model('blogpost', blogpostSchema);
 
 const db = {
 "blogposts" : [
@@ -22,16 +51,102 @@ const db = {
   ]
 }
 
+//Allow app to use CORS. Important for transferring JSON files.
 app.use(cors())
+
+//Set appropriate headers for server
+app.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested0With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+    next();
+});
+
+//Support parsing of application/json type post data
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+//Tell mongoose to connect to MongoDB instance and look for ember data.
+//If no database exists, it will create one for us.
+mongoose.connect('mongodb://localhost/emberData');
 
 app.get('/', function (req, res) {
     //res.send('Hello World!')
     res.send('hello')
 })
 
+app.get('/api/', function(req,res){
+    res.send('working');
+});
+
+//route to get all of the registrations
+app.get('/api/registrations', function(req,res){
+    RegistrationModel.find({}, function(err,docs){
+        if(err){
+            res.send({error:res});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+            res.send({registration:docs});
+        }
+    });
+});
+
+//route to post registration
+app.post('/api/registrations', function(req,res){
+    var newRegistration = new RegistrationModel({username: req.body.registration.username,
+    password: req.body.registration.password, email: req.body.registration.email});
+    newRegistration.save(function (err){
+      if(err) return handleError(err);
+    });
+});
+
+//route to get all of the blogposts
+app.get('/api/blogposts', function(req,res){
+    BlogpostModel.find({}, function(err,docs){
+        if(err){
+            res.send({error:res});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+            res.send({blogpost:docs});
+        }
+    });
+});
+
+//in response send the id and update the store
+app.post('/api/blogposts', function(req,res){
+    var newPost = new BlogpostModel({title: req.body.blogpost.title, content: req.body.blogpost.content});
+    newPost.save(function (err) {
+      if (err) return handleError(err);
+    });
+});
+
+//route to authenticate a user
+app.post('/api/authenticate', function(req,res){
+    var authenticate = new RegistrationModel({username: req.body.username,
+    password: req.body.password, email: null});
+
+    RegistrationModel.find({username: authenticate.username, password: authenticate.password}, function(err,docs){
+        if(docs.length == 0){
+            res.send({error:"Incorrect Password Or Username"});
+        }
+        else {
+            //Where registration is name of model we will create in ember
+            //Docs is array of the returned document
+
+            res.send({registration:docs});
+
+        }
+    });
+});
+
 app.get('/blogposts', function(req, res){
     res.send(db)
 })
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+
+//Server starts to run
+app.listen('3000');

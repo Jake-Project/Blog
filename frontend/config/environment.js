@@ -36,7 +36,8 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'script-src': "'self' 'unsafe-eval' apis.google.com",
       'frame-src': "'self' https://*.firebaseapp.com",
-      'connect-src': "'self' wss://*.firebaseio.com https://*.googleapis.com"
+      //Sets the source to connect to as the express server
+      'connect-src' : "'self' http://localhost:3000"
     },
     EmberENV: {
       FEATURES: {

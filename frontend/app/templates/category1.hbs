@@ -20,7 +20,6 @@
     <button class="btn btn-danger btn-xs" {{action 'deleteBlog' this.blogpost.id}}>Delete</button>
     <hr class="my-4">
     <h1><a href = {{blogpost.id}} {{action "showModal" blogpost.title blogpost.content}}>{{blogpost.title}}</a></h1>
-    <h2>{{blogpost.id}}</h2>
     {{#if isShowingModal}}
       {{#modal-dialog onClose="hideModal" targetAttachment="center" translucentOverlay=true}}
         <div class="jumbotron text-center">

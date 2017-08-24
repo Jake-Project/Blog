@@ -9,7 +9,7 @@
     {{input id='identification' placeholder='Enter login' value=username}}
     <label for="password">Password</label>
     {{input id='password' placeholder='Enter Password' type='password' value=password}}
-    <button {{action 'authenticate' 'password'}}>Login</button>
+    <button type = "submit">Login</button>
     {{#if errorMessage}}
       <p>{{errorMessage}}</p>
     {{/if}}
